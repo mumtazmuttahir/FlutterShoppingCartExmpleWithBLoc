@@ -1,8 +1,9 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shopping_cart/src/blocs/wishlist/wishlist_bloc.dart';
 import 'package:shopping_cart/src/models/models.dart';
 import 'package:shopping_cart/src/widgets/widgets.dart';
-// import '../../widgets/widgets.dart';
 
 // ignore: use_key_in_widget_constructors
 class ProductScreen extends StatelessWidget {
@@ -34,18 +35,37 @@ class ProductScreen extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 IconButton(
-                    onPressed: () {},
-                    icon: const Icon(
-                      Icons.share,
-                      color: Colors.white,
-                    )),
-                IconButton(
                   onPressed: () {},
                   icon: const Icon(
-                    Icons.favorite,
+                    Icons.share,
                     color: Colors.white,
                   ),
                 ),
+                BlocBuilder<WishlistBloc, WishlistState>(
+                  builder: (context, state) {
+                    return IconButton(
+                      onPressed: () {
+                        context.read<WishlistBloc>().add(AddWishlistProduct(product));
+                      },
+                      icon: const Icon(
+                        Icons.favorite,
+                        color: Colors.white,
+                      ),
+                    );
+                  },
+                ),
+                // IconButton(
+                //   onPressed: () {
+                //     //context.read<WishlistBloc>().add(AddWishlistProduct(product));
+                //   },
+                //   icon: const Icon(
+                //     Icons.favorite,
+                //     color: Colors.white,
+                //   ),
+                // ),
+                // BlocBuilder<WishlistBloc, WishlistState>(builder: (context, state) {
+                //   return Container();
+                // }),
                 ElevatedButton(
                   onPressed: () {},
                   style: ElevatedButton.styleFrom(primary: Colors.white),

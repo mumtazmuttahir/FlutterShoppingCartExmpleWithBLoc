@@ -2,18 +2,23 @@ import 'package:flutter/material.dart';
 import 'package:shopping_cart/src/models/models.dart';
 
 class ProdcutCard extends StatelessWidget {
-
   final Product product;
   final double widthFctor;
+  final double leftPosition;
+  final bool isWishlist;
 
-  const ProdcutCard({
-    Key? key,
-    required this.product,
-    this.widthFctor = 2.5
-  }) : super(key: key);
+  const ProdcutCard(
+      {Key? key,
+      required this.product,
+      this.widthFctor = 2.5,
+      this.leftPosition = 5,
+      this.isWishlist = false})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final double widthValue = MediaQuery.of(context).size.width / widthFctor;
+
     return InkWell(
       onTap: () {
         Navigator.pushNamed(context, '/product', arguments: product);
@@ -21,7 +26,7 @@ class ProdcutCard extends StatelessWidget {
       child: Stack(
         children: [
           SizedBox(
-            width: MediaQuery.of(context).size.width / widthFctor,
+            width: widthValue,
             height: 150,
             child: Image.network(
               product.imageUrl,
@@ -30,8 +35,10 @@ class ProdcutCard extends StatelessWidget {
           ),
           Positioned(
             top: 60,
+            left: leftPosition,
+            right: leftPosition <= 6 ? 10 : 10,
             child: Container(
-              width: MediaQuery.of(context).size.width / widthFctor - 10,
+              width: widthValue - 5 - leftPosition,
               height: 80,
               decoration: BoxDecoration(
                 color: Colors.black.withAlpha(50),
@@ -40,9 +47,10 @@ class ProdcutCard extends StatelessWidget {
           ),
           Positioned(
             top: 65,
-            left: 5,
+            left: leftPosition + 5,
+            right: leftPosition <= 6 ? 10 : 10,
             child: Container(
-              width: MediaQuery.of(context).size.width / widthFctor - 10,
+              width: widthValue - 10 - leftPosition,
               height: 70,
               decoration: const BoxDecoration(
                 color: Colors.black,
@@ -51,39 +59,57 @@ class ProdcutCard extends StatelessWidget {
                 padding: const EdgeInsets.all(8.0),
                 child: Row(
                   children: [
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          product.name,
-                          style: Theme.of(context)
-                              .textTheme
-                              .headline5!
-                              .copyWith(
-                                color: Colors.white,
-                              ),
-                        ),
-                        Text(
-                          '€${product.price}',
-                          style: Theme.of(context)
-                              .textTheme
-                              .headline5!
-                              .copyWith(
-                                color: Colors.white,
-                              ),
-                        ),
-                      ],
+                    Expanded(
+                      flex: 10,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            product.name,
+                            style:
+                                Theme.of(context).textTheme.headline5!.copyWith(
+                                      color: Colors.white,
+                                    ),
+                          ),
+                          Text(
+                            '€${product.price}',
+                            style:
+                                Theme.of(context).textTheme.headline5!.copyWith(
+                                      color: Colors.white,
+                                    ),
+                          ),
+                        ],
+                      ),
                     ),
                     Expanded(
-                      child: IconButton(
-                        onPressed: () {},
-                        icon: const Icon(
-                          Icons.add_circle,
-                          color: Colors.white,
+                      flex: isWishlist ? 3 : 4,
+                      child: Align(
+                        alignment: Alignment.centerRight,
+                        child: IconButton(
+                          onPressed: () {},
+                          icon: const Icon(
+                            Icons.add_circle,
+                            color: Colors.white,
+                          ),
                         ),
                       ),
                     ),
+                    isWishlist
+                        ? Expanded(
+                            flex: 3,
+                            child: Align(
+                              alignment: Alignment.centerRight,
+                              child: IconButton(
+                                onPressed: () {},
+                                icon: const Icon(
+                                  Icons.delete,
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ),
+                          )
+                        : const SizedBox(),
                   ],
                 ),
               ),
