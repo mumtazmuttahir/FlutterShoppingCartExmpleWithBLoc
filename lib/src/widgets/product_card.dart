@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shopping_cart/src/blocs/wishlist/wishlist_bloc.dart';
 import 'package:shopping_cart/src/models/models.dart';
 
 class ProdcutCard extends StatelessWidget {
@@ -100,13 +102,32 @@ class ProdcutCard extends StatelessWidget {
                             flex: 3,
                             child: Align(
                               alignment: Alignment.centerRight,
-                              child: IconButton(
-                                onPressed: () {},
-                                icon: const Icon(
-                                  Icons.delete,
-                                  color: Colors.white,
-                                ),
+                              child: BlocBuilder<WishlistBloc, WishlistState>(
+                                builder: (context, state) {
+                                  return IconButton(
+                                    onPressed: () {
+                                      context
+                                          .read<WishlistBloc>()
+                                          .add(RemoveWishlistProduct(product));
+
+                        const snackBar = SnackBar(content: Text('Removed from your wishlist'));
+                        ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                                    },
+                                    icon: const Icon(
+                                      Icons.delete,
+                                      color: Colors.white,
+                                    ),
+                                  );
+                                },
                               ),
+
+                              // IconButton(
+                              //   onPressed: () {},
+                              //   icon: const Icon(
+                              //     Icons.delete,
+                              //     color: Colors.white,
+                              //   ),
+                              // ),
                             ),
                           )
                         : const SizedBox(),

@@ -46,6 +46,8 @@ class ProductScreen extends StatelessWidget {
                     return IconButton(
                       onPressed: () {
                         context.read<WishlistBloc>().add(AddWishlistProduct(product));
+                        const snackBar = SnackBar(content: Text('Added to your wishlist'));
+                        ScaffoldMessenger.of(context).showSnackBar(snackBar);
                       },
                       icon: const Icon(
                         Icons.favorite,
@@ -54,18 +56,6 @@ class ProductScreen extends StatelessWidget {
                     );
                   },
                 ),
-                // IconButton(
-                //   onPressed: () {
-                //     //context.read<WishlistBloc>().add(AddWishlistProduct(product));
-                //   },
-                //   icon: const Icon(
-                //     Icons.favorite,
-                //     color: Colors.white,
-                //   ),
-                // ),
-                // BlocBuilder<WishlistBloc, WishlistState>(builder: (context, state) {
-                //   return Container();
-                // }),
                 ElevatedButton(
                   onPressed: () {},
                   style: ElevatedButton.styleFrom(primary: Colors.white),
