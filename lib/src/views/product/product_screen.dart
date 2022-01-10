@@ -1,6 +1,5 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shopping_cart/src/blocs/cart/cart_bloc.dart';
 import 'package:shopping_cart/src/blocs/wishlist/wishlist_bloc.dart';

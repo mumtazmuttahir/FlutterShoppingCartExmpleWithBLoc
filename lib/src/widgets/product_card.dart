@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shopping_cart/src/blocs/blocs.dart';
-import 'package:shopping_cart/src/blocs/wishlist/wishlist_bloc.dart';
 import 'package:shopping_cart/src/models/models.dart';
 
 class ProdcutCard extends StatelessWidget {
