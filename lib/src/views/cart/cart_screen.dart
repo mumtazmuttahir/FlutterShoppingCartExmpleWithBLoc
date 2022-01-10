@@ -63,7 +63,7 @@ class CartScreen extends StatelessWidget {
                           Expanded(
                             flex: 3,
                             child: Text(
-                              const Cart().freeDeliveryString,
+                              state.cart.freeDeliveryString,
                               style: Theme.of(context).textTheme.headline5,
                             ),
                           ),
@@ -126,7 +126,7 @@ class CartScreen extends StatelessWidget {
                                   style: Theme.of(context).textTheme.headline5,
                                 ),
                                 Text(
-                                  '\$ ${const Cart().subTotalString}',
+                                  '\$ ${state.cart.subTotalString}',
                                   style: Theme.of(context).textTheme.headline5,
                                 ),
                               ],
@@ -142,7 +142,7 @@ class CartScreen extends StatelessWidget {
                                   style: Theme.of(context).textTheme.headline5,
                                 ),
                                 Text(
-                                  '\$ ${const Cart().deliveryFeeString}',
+                                  '\$ ${state.cart.deliveryFeeString}',
                                   style: Theme.of(context).textTheme.headline5,
                                 ),
                               ],
@@ -181,7 +181,7 @@ class CartScreen extends StatelessWidget {
                                         .copyWith(color: Colors.white),
                                   ),
                                   Text(
-                                    '\$ ${const Cart().totalString}',
+                                    '\$ ${state.cart.totalString}',
                                     style: Theme.of(context)
                                         .textTheme
                                         .headline5!

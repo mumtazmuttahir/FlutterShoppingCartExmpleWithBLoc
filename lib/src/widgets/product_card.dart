@@ -96,7 +96,9 @@ class ProdcutCard extends StatelessWidget {
                           child: Align(
                             alignment: Alignment.centerRight,
                             child: IconButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                context.read<CartBloc>().add(ProductAddedToCartEvent(product));
+                              },
                               icon: const Icon(
                                 Icons.add_circle,
                                 color: Colors.white,
