@@ -15,6 +15,7 @@ class App extends StatelessWidget {
         BlocProvider(create: (_) => WishlistBloc()..add(StartWishlist())),
       ],
       child: MaterialApp(
+        debugShowCheckedModeBanner: false,
         title: AppClassConfiguration.title_name,
         theme: theme(),
         // home: HomeScreen(),
