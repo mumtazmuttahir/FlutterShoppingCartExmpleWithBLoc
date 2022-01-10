@@ -77,6 +77,7 @@ class ProductScreen extends StatelessWidget {
             ),
           ),
         ),
+        //Body add
         body: ProductCarousel(product: product));
   }
 }
