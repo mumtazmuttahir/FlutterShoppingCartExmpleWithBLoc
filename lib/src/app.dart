@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shopping_cart/src/blocs/cart/cart_bloc.dart';
 import 'package:shopping_cart/src/blocs/wishlist/wishlist_bloc.dart';
 import './configs/config.dart';
 import './views/home/home_screen.dart';
-
 
 class App extends StatelessWidget {
   const App({Key? key}) : super(key: key);
@@ -12,7 +12,18 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider(create: (_) => WishlistBloc()..add(StartWishlist())),
+        BlocProvider(
+          create: (_) => WishlistBloc()
+            ..add(
+              StartWishlist(),
+            ),
+        ),
+        BlocProvider(
+          create: (_) => CartBloc()
+            ..add(
+              CartStartedEvent(),
+            ),
+        ),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
@@ -24,5 +35,4 @@ class App extends StatelessWidget {
       ),
     );
   }
-  
 }
