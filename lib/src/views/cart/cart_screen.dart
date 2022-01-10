@@ -49,33 +49,49 @@ class CartScreen extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(
-                      'Add \$20.0 for Free delivery',
-                      style: Theme.of(context).textTheme.headline5,
-                    ),
-                    ElevatedButton(
-                      onPressed: () {
-                        Navigator.pushNamed(context, '/');
-                      },
-                      style: ElevatedButton.styleFrom(
-                        primary: Colors.black,
-                        shape: const RoundedRectangleBorder(),
-                        elevation: 0,
-                      ),
+                    Expanded(
+                      flex: 3,
                       child: Text(
-                        'Add More Items',
-                        style: Theme.of(context).textTheme.headline5!.copyWith(
-                              color: Colors.white,
-                            ),
+                        const Cart().freeDeliveryString,
+                        style: Theme.of(context).textTheme.headline5,
+                      ),
+                    ),
+                    Expanded(
+                      flex: 2,
+                      child: ElevatedButton(
+                        onPressed: () {
+                          Navigator.pushNamed(context, '/');
+                        },
+                        style: ElevatedButton.styleFrom(
+                          primary: Colors.black,
+                          shape: const RoundedRectangleBorder(),
+                          elevation: 0,
+                        ),
+                        child: Text(
+                          'Add More Items',
+                          style:
+                              Theme.of(context).textTheme.headline5!.copyWith(
+                                    color: Colors.white,
+                                    fontSize: 12,
+                                  ),
+                        ),
                       ),
                     ),
                   ],
                 ),
-                CartProductCard(
-                  product: Product.products[0],
+                const SizedBox(
+                  height: 10,
                 ),
-                CartProductCard(
-                  product: Product.products[2],
+                SizedBox(
+                  height: 300,
+                  child: ListView.builder(
+                    itemCount: Cart.products.length,
+                    itemBuilder: (context, index) {
+                      return CartProductCard(
+                        product: Cart.products[index],
+                      );
+                    },
+                  ),
                 ),
               ],
             ),
@@ -97,7 +113,7 @@ class CartScreen extends StatelessWidget {
                             style: Theme.of(context).textTheme.headline5,
                           ),
                           Text(
-                            '\$5.98',
+                            '\$ ${const Cart().subTotalString}',
                             style: Theme.of(context).textTheme.headline5,
                           ),
                         ],
@@ -113,7 +129,7 @@ class CartScreen extends StatelessWidget {
                             style: Theme.of(context).textTheme.headline5,
                           ),
                           Text(
-                            '\$2.90',
+                            '\$ ${const Cart().deliveryFeeString}',
                             style: Theme.of(context).textTheme.headline5,
                           ),
                         ],
@@ -150,7 +166,7 @@ class CartScreen extends StatelessWidget {
                                   .copyWith(color: Colors.white),
                             ),
                             Text(
-                              '\$12.90',
+                              '\$ ${const Cart().totalString}',
                               style: Theme.of(context)
                                   .textTheme
                                   .headline5!
