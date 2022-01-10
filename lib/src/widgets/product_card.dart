@@ -110,8 +110,11 @@ class ProdcutCard extends StatelessWidget {
                                           .read<WishlistBloc>()
                                           .add(RemoveWishlistProduct(product));
 
-                        const snackBar = SnackBar(content: Text('Removed from your wishlist'));
-                        ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                                      const snackBar = SnackBar(
+                                          content: Text(
+                                              'Removed from your wishlist'));
+                                      ScaffoldMessenger.of(context)
+                                          .showSnackBar(snackBar);
                                     },
                                     icon: const Icon(
                                       Icons.delete,
