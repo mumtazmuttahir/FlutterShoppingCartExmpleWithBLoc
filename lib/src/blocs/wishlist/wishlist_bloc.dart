@@ -8,7 +8,7 @@ part 'wishlist_event.dart';
 part 'wishlist_state.dart';
 
 class WishlistBloc extends Bloc<WishlistEvent, WishlistState> {
-  WishlistBloc() : super(WishlistLoding());
+  WishlistBloc() : super(WishlistLoading());
 
 
   @override
@@ -23,7 +23,7 @@ class WishlistBloc extends Bloc<WishlistEvent, WishlistState> {
   }
 
   Stream<WishlistState> _mapStartWishlistToState() async* {
-    yield WishlistLoding();
+    yield WishlistLoading();
     try {
       await Future<void>.delayed(const Duration(seconds: 1));
       yield const WishlistLoaded();
