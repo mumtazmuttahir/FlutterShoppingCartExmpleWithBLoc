@@ -21,7 +21,7 @@ class WishlistScreen extends StatelessWidget {
       bottomNavigationBar: const CustomerNavigationBar(),
       body: BlocBuilder<WishlistBloc, WishlistState>(
         builder: (context, state) {
-          if (state is WishlistLoding) {
+          if (state is WishlistLoading) {
             return const Center(
               child: CircularProgressIndicator(),
             );
