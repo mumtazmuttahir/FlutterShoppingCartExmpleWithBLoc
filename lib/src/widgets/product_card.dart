@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shopping_cart/src/blocs/blocs.dart';
 import 'package:shopping_cart/src/blocs/wishlist/wishlist_bloc.dart';
 import 'package:shopping_cart/src/models/models.dart';
 
@@ -84,19 +85,29 @@ class ProdcutCard extends StatelessWidget {
                         ],
                       ),
                     ),
-                    Expanded(
-                      flex: isWishlist ? 3 : 4,
-                      child: Align(
-                        alignment: Alignment.centerRight,
-                        child: IconButton(
-                          onPressed: () {},
-                          icon: const Icon(
-                            Icons.add_circle,
-                            color: Colors.white,
+                    BlocBuilder<CartBloc, CartState>(builder: (context, state) {
+                      if (state is CartLoading) {
+                        return const Center(
+                          child: CircularProgressIndicator(),
+                        );
+                      } else if (state is CartLoaded) {
+                        return Expanded(
+                          flex: isWishlist ? 3 : 4,
+                          child: Align(
+                            alignment: Alignment.centerRight,
+                            child: IconButton(
+                              onPressed: () {},
+                              icon: const Icon(
+                                Icons.add_circle,
+                                color: Colors.white,
+                              ),
+                            ),
                           ),
-                        ),
-                      ),
-                    ),
+                        );
+                      } else {
+                        return const Text('Something is wrong');
+                      }
+                    }),
                     isWishlist
                         ? Expanded(
                             flex: 3,
