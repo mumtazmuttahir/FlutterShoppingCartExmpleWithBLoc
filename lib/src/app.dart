@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shopping_cart/src/blocs/cart/cart_bloc.dart';
 import 'package:shopping_cart/src/blocs/wishlist/wishlist_bloc.dart';
 import './configs/config.dart';
-import './views/home/home_screen.dart';
+import './views/views.dart';
 
 class App extends StatelessWidget {
   const App({Key? key}) : super(key: key);
@@ -31,7 +31,7 @@ class App extends StatelessWidget {
         theme: theme(),
         // home: HomeScreen(),
         onGenerateRoute: AppRouter.onGenerateRoute,
-        initialRoute: HomeScreen.routeName,
+        initialRoute: SplashScreen.routeName,//HomeScreen.routeName,
       ),
     );
   }
