@@ -5,8 +5,9 @@ import 'package:shopping_cart/src/blocs/blocs.dart';
 
 class CartProductCard extends StatelessWidget {
   final Product product;
+  final int quantity;
 
-  const CartProductCard({Key? key, required this.product}) : super(key: key);
+  const CartProductCard({Key? key, required this.product, required this.quantity}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -54,7 +55,7 @@ class CartProductCard extends StatelessWidget {
                   },
                 ),
                 Text(
-                  '1',
+                  '$quantity',
                   style: Theme.of(context).textTheme.headline6,
                 ),
                 IconButton(
