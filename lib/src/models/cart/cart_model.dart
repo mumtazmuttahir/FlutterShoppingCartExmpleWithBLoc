@@ -3,15 +3,15 @@ import 'package:equatable/equatable.dart';
 import '../models.dart';
 
 class Cart extends Equatable {
-
   final List<Product> products;
 
   const Cart({this.products = const <Product>[]});
 
-  double get subTotal => products.fold(0, (total, current) => total + current.price);
+  double get subTotal =>
+      products.fold(0, (total, current) => total + current.price);
   String get subTotalString => subTotal.toStringAsFixed(2);
 
-  double deliveryFee (subTotal) {
+  double deliveryFee(subTotal) {
     if (subTotal >= 30.0) {
       return 0.0;
     }
@@ -21,7 +21,7 @@ class Cart extends Equatable {
   String get deliveryFeeString => deliveryFee(subTotal).toStringAsFixed(2);
 
   String freeDelivery(subTotal) {
-    if(subTotal >= 30.0) {
+    if (subTotal >= 30.0) {
       return 'You have a free Delivery';
     }
     double missing = 30.0 - subTotal;
@@ -35,6 +35,22 @@ class Cart extends Equatable {
   }
 
   String get totalString => total(subTotal, deliveryFee).toStringAsFixed(2);
+
+  Map productQuantity(products) {
+    var quantity = {};
+
+    products.forEach(
+      (product) {
+        if (!quantity.containsKey(product)) {
+          quantity[product] = 1;
+        } else {
+          quantity[product] += 1;
+        }
+      },
+    );
+
+    return quantity;
+  }
 
   // static List<Product> products = [
   //   const Product(
